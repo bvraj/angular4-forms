@@ -1,0 +1,81 @@
+.form-builder .addField {
+    line-height: 16px;
+    vertical-align: middle;
+    font-size: 14px;
+    float: right;
+    text-align: center;
+}
+
+.form-builder .addField i {
+    line-height: 14px;
+    vertical-align: middle;
+    font-size: 20px;
+}
+
+.form-builder .addField span {
+    line-height: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+.mat-drawer.mat-drawer-side {
+    width: 250px;
+    margin: 0;
+    padding: 0;
+}
+
+.mat-drawer-content {
+    width: calc(100% - 250px);
+    margin: 0 0 0 250px;
+}
+
+.mat-drawer-container {
+    float: left;
+    width: 100%;
+    min-height: 200px;
+}
+
+.example-container {
+    width: 100%;
+    margin: 0px;
+}
+
+.edit-container {
+    float: left;
+    width: 100%;
+    position: relative;
+}
+
+.edit-container .matDelete {
+    float: right;
+    cursor: pointer;
+}
+
+.edit-container .mat-form-field {
+    float: left;
+    width: 100%;
+}
+
+.matFormArea {
+    float: left;
+    width: 100%;
+}
+
+.mat-section {
+    float: left;
+    width: 100%;
+}
+
+.formDataContainer {
+    display: block;
+}
+
+.formDataContainer form {
+    float: left;
+    padding: 10px;
+}
+
+.formDataContainer form label {
+    display: inline-block;
+}

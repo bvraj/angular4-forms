@@ -1,0 +1,185 @@
+<mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened="true">
+        <button mat-raised-button color="primary" (click)="changeShowStatus()">Add Field</button>
+        <mat-form-field *ngIf="showField">
+            <mat-select [(ngModel)]="selectedNav" (change)="setNav(selectedNav)" placeholder="Select Option">
+                <mat-option [value]="q" *ngFor="let q of navs">{{q}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="container">
+            <mat-grid-list cols="1" *ngIf="selectedOption === 'Input Box'">
+
+                <!--
+                        <mat-form-field> <input matInput type="text" #textbox placeholder="placeholder" [(ngModel)]="textValue"> -->
+                <!-- <mat-icon matSuffix (click)="onEditInput(textbox.value)">mode_edit</mat-icon>
+                    <mat-icon matSuffix (click)="onSaveInput(textbox.value)">check</mat-icon> 
+                </mat-form-field>-->
+                <div class="edit-container">
+                    <!-- <mat-icon class="matDelete" (onclick)="onDeleteElement()">delete</mat-icon> -->
+                    <mat-form-field>
+                        <input matInput placeholder="Field Name" type="text" [(ngModel)]="user.name" value="">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Placeholder" type="text" [(ngModel)]="user.placeholder" value="">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-select placeholder="Select Type" [(ngModel)]="user.fieldType">
+                            <mat-option *ngFor="let type of types" [value]="type.name">{{type.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <section class="mat-section">
+                        <mat-checkbox [(ngModel)]="user.isRequired" value="checkbox1">
+                            Required Field
+                        </mat-checkbox>
+                    </section>
+                    <section style="text-align:center; width: 100%; float: left;">
+                        <button mat-raised-button color="accent" style="display: inline-block;" (click)="addToForm(user)">Add</button>
+                    </section>
+                    <!-- <div *ngIf="showFieldValues">
+                        <div *ngFor="let data of datas">
+                            <span>Field Name: {{data.fieldname}}</span>
+                            <span>Placeholder: {{data.placeholder}}</span>
+                            <span>Input Type: {{data.type}} </span>
+                            <span>CheckBox: {{data.required}}</span>
+                        </div>
+                    </div> -->
+                </div>
+
+            </mat-grid-list>
+            <mat-grid-list cols="1" *ngIf="selectedOption === 'Radio Button'">
+                <!-- <mat-radio-group>
+                    <mat-radio-button value="1">Option 1</mat-radio-button>
+                    <mat-radio-button value="2">Option 2</mat-radio-button>
+                </mat-radio-group> -->
+                <div class="edit-container">
+                    <!-- <mat-icon class="matDelete" (onclick)="onDeleteElement()">delete</mat-icon> -->
+                    <mat-form-field>
+                        <input matInput placeholder="Field Name" type="text" [(ngModel)]="radio.fieldName" value="">
+                    </mat-form-field>
+                    <!-- <mat-form-field>
+                        <input matInput placeholder="Option1" type="text" [(ngModel)]="user.option1" value="">
+                        <mat-icon matSuffix style="cursor:pointer;" (onclick)="addOneMore()">add</mat-icon>
+                    </mat-form-field> -->
+                    <mat-form-field *ngFor="let option of radio.radios">
+                        <input matInput placeholder="{{option.name}}" type="text" [(ngModel)]="option.name" value="option.name">
+                    </mat-form-field>
+                    <mat-icon matSuffix style="cursor:pointer;" (click)="addOneMoreRadio()">add</mat-icon>
+                    <section class="mat-section">
+                        <mat-checkbox [(ngModel)]="radio.isRequired">
+                            Required Field
+                        </mat-checkbox>
+                    </section>
+                    <section style="text-align:center; width: 100%; float: left;">
+                        <button mat-raised-button color="accent" style="display: inline-block;" (click)="radioAddToForm(radio)">Add</button>
+                    </section>
+                </div>
+            </mat-grid-list>
+            <mat-grid-list cols="1" *ngIf="selectedOption === 'Check Box'">
+                <mat-form-field style="width: 100%;">
+                    <input matInput placeholder="Field Name" type="text" [(ngModel)]="cbox.fieldName" value="">
+                </mat-form-field>
+                <mat-form-field *ngFor="let check of cbox.cboxes" style="width: 100%;">
+                    <input matInput placeholder="{{check.name}}" type="text" [(ngModel)]="check.name" value="check.name">
+                </mat-form-field>
+                <mat-icon matSuffix style="cursor:pointer;" (click)="addOneMoreCheckbox()">add</mat-icon>
+                <section class="mat-section" style="width: 100%;">
+                    <mat-checkbox [(ngModel)]="cbox.isRequired">
+                        Required Field
+                    </mat-checkbox>
+                </section>
+                <section style="text-align:center; width: 100%; float: left;">
+                    <button mat-raised-button color="accent" style="display: inline-block;" (click)="checkAddToForm(cbox)">Add</button>
+                </section>
+            </mat-grid-list>
+            <mat-grid-list cols="1" *ngIf="selectedOption === 'Text Area'">
+                <div class="edit-container">
+                    <mat-form-field>
+                        <input matInput placeholder="Field Name" type="text" [(ngModel)]="textArea.fieldName" value="">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Placeholder" type="text" [(ngModel)]="textArea.placeholder" value="">
+                    </mat-form-field>
+                    <section class="mat-section">
+                        <mat-checkbox [(ngModel)]="textArea.isRequired">
+                            Required Field
+                        </mat-checkbox>
+                    </section>
+                    <section style="text-align:center; width: 100%; float: left;">
+                        <button mat-raised-button color="accent" style="display: inline-block;" (click)="textAreaAddToForm(textArea)">Add</button>
+                    </section>
+                </div>
+            </mat-grid-list>
+            <mat-grid-list cols="1" *ngIf="selectedOption === 'Select Box'">
+                <div class="edit-container">
+                    <mat-form-field>
+                        <input matInput placeholder="Field Name" type="text" [(ngModel)]="select.fieldName" value="">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Placeholder" type="text" [(ngModel)]="select.placeholder" value="">
+                    </mat-form-field>
+                    <mat-form-field *ngFor="let data of select.selects">
+                        <input matInput placeholder="{{data.name}}" type="text" [(ngModel)]="data.name" value="data.name">
+                    </mat-form-field>
+                    <mat-icon matSuffix style="cursor:pointer;" (click)="addOneMoreOption()">add</mat-icon>
+                    <section class="mat-section">
+                        <mat-checkbox [(ngModel)]="select.isRequired">
+                            Required Field
+                        </mat-checkbox>
+                    </section>
+                    <section style="text-align:center; width: 100%; float: left;">
+                        <button mat-raised-button color="accent" style="display: inline-block;" (click)="selectAddToForm(select)">Add</button>
+                    </section>
+                </div>
+            </mat-grid-list>
+        </div>
+    </mat-drawer-content>
+
+</mat-drawer-container>
+
+<form id="formValues" action="#" method="post">
+    <div *ngIf="datas.length > 0" class="formDataContainer">
+        <div *ngFor="let item of datas">
+            <label>{{item.name}}: </label>
+            <mat-form-field>
+                <input matInput type="{{item.fieldType | lowercase}}" placeholder="{{item.placeholder}}" [attr.required]="item.isRequired">
+            </mat-form-field>
+        </div>
+    </div>
+    <div *ngIf="radioData.length > 0" class="formDataContainer">
+        <mat-radio-group>
+            <label>{{radio.fieldName}}: </label>
+            <mat-radio-button value="{{item.name}}" *ngFor="let item of radio.radios">{{item.name}}</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div *ngIf="checkData.length > 0" class="formDataContainer">
+        <label>{{cbox.fieldName}}: </label>
+        <section class="mat-section" *ngFor="let item of cbox.cboxes">
+            <mat-checkbox>
+                {{item.name}}
+            </mat-checkbox>
+        </section>
+    </div>
+    <div *ngIf="textAreaData.length > 0" class="formDataContainer">
+        <div *ngFor="let data of textAreaData">
+            <label>{{data.fieldName}}: </label>
+            <mat-form-field>
+                <textarea matInput placeholder="{{data.placeholder}}"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+    <div *ngIf="selectData.length > 0" class="formDataContainer">
+        <div>
+            <label>{{select.fieldName}}</label>
+            <mat-form-field>
+                <mat-select placeholder="{{select.placeholder}}">
+                    <mat-option *ngFor="let data of select.selects" value="{{data.name}}">{{data.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <!-- <button mat-button (click)="onFormSubmit()" type="submit">Submit</button> -->
+</form>
+
+<!-- <input type="file" class="upload" (change)="changeListener($event.target.files)"> -->

@@ -1,0 +1,44 @@
+<div>
+    <p>
+        <button mat-raised-button color="primary" (click)="addNewColumn()">Add New Column</button>
+    </p>
+    <mat-form-field *ngIf="showColumn">
+        <input matInput placeholder="Field Name" type="text" value="" [(ngModel)]="column">
+        <mat-icon matSuffix style="cursor:pointer;" (click)="addToTable(column)">add</mat-icon>
+    </mat-form-field>
+
+    <!-- <table class="table table-hover" *ngIf="tableData.length > 0">
+        <thead>
+            <tr>
+                <th *ngFor="let data of tableData">{{data}}</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let field of fieldArray; let i = index">
+                <td *ngFor="let data of tableData">
+                    <input class="form-control" type="text" />
+                </td>
+                <td>
+                    <button class="btn btn-default" type="button" (click)="deleteRow(i)">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td *ngFor="let data of tableData">
+                    <input class="form-control" type="text" [(ngModel)]="newAttribute.name" />
+                </td>
+                <td>
+                    <button class="btn btn-default" type="button" (click)="addNewRow()">Add</button>
+                </td>
+            </tr>
+        </tbody>
+    </table> -->
+</div>
+
+<table class="table table-hover">
+    <tr *ngFor=" let data of table; let i = index">
+        <td *ngFor="let row of data | keys">{{row.value}}
+
+        </td>
+    </tr>
+</table>

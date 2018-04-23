@@ -1,0 +1,15 @@
+<p>
+    <button mat-raised-button color="primary" (click)="addNewColumn()">Add New Column</button>
+</p>
+<mat-form-field *ngIf="showColumn">
+    <input matInput placeholder="Field Name" type="text" value="" [(ngModel)]="columnName">
+    <mat-icon matSuffix style="cursor:pointer;" (click)="addColumn(columnName)">add</mat-icon>
+</mat-form-field>
+
+<div class="container">
+    <input #search class="search" type="text" placeholder="Search..." (keydown.enter)="onSearch(search.value)">
+    <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+</div>
+<div *ngFor="let item of Object.keys(settings.columns)">
+    <input type="text" value="{{settings.columns[item].title}}" (input)="changed($event.target.value, item, $event)">
+</div>
